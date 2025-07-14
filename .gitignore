@@ -1,0 +1,42 @@
+# Java
+*.class
+*.log
+
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Lombok generated files
+lombok.config
+
+# Environment files
+.env
+.env.*
+
+# Spring Boot dev tools
+.spring-boot-devtools.properties
+
+# Application specific
+/reports/
+/logs/
+/tmp/
+
+# Mac system files
+.DS_Store
