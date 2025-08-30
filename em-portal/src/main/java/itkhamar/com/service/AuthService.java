@@ -26,7 +26,7 @@ public class AuthService {
                 .flatMap(user -> {
                     if (passwordEncoder.matches(password, user.getPassword())) {
                         List<String> roles = user.getRoles().stream().map(Enum::name).toList();
-                        String token = jwtUtil.generateToken(user.getEmail(), roles);
+                        String token = jwtUtil.generateToken(user.getEmail(), appendROLE(roles));
                         return Mono.just(ResponseEntity.ok(new LoginResponse(token, roles)));
                     } else {
                         return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials"));
@@ -35,6 +35,9 @@ public class AuthService {
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found")));
     }
 
+    private List<String> appendROLE(List<String> roles) {
+        return roles.stream().map(r -> "ROLE_" + r).toList();
+    }
 //    public Mono<ResponseEntity<String>> register(AppUser user) {
 //        return userRepository.findByEmail(user.getUsername())
 //                .flatMap(existing -> Mono.just(ResponseEntity.badRequest().body("User already exists")))
