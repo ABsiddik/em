@@ -9,6 +9,7 @@ import itkhamar.com.repository.EmployeeRepository;
 import itkhamar.com.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class DataInitializer {
@@ -41,7 +43,7 @@ public class DataInitializer {
                                 .build();
                         return employeeRepository.save(defaultEmployee)
                                 .flatMap(savedEmployee -> {
-                                    System.out.println("Default Employee is created.");
+                                    log.info("Default Employee is created.");
 
                                     Set<RoleEnum> roles = new HashSet<>();
                                     roles.add(RoleEnum.USER);
@@ -57,10 +59,10 @@ public class DataInitializer {
                                             .build();
 
                                     return userRepository.save(defaultUser)
-                                            .doOnSuccess(user -> System.out.println("✅ Default admin user created."));
+                                            .doOnSuccess(user -> log.info("✅ Default admin user created."));
                                 });
                     } else {
-                        System.out.println("ℹ️ Users already exist. Skipping default user creation.");
+                        log.info("ℹ️ Users already exist. Skipping default user creation.");
                         return Mono.empty();
                     }
                 })
