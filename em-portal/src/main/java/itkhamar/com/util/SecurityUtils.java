@@ -1,6 +1,7 @@
 package itkhamar.com.util;
 
 
+import itkhamar.com.exception.BadRequestException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
@@ -13,6 +14,7 @@ public class SecurityUtils {
     }
 
     public static Mono<String> getCurrentUsername() {
-        return getCurrentUser().map(Authentication::getName);
+        Mono<String> username = getCurrentUser().map(Authentication::getName);
+        return username.switchIfEmpty(Mono.error(new BadRequestException("Invalid user access")));
     }
 }

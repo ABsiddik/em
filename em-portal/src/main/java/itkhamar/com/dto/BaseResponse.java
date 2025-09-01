@@ -3,6 +3,7 @@ package itkhamar.com.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.ResponseEntity;
 
 @Data
 @AllArgsConstructor
@@ -12,8 +13,8 @@ public class BaseResponse<T> {
     private String message;
     private T data;
 
-    public static <T> BaseResponse<T> success(T data) {
-        return new BaseResponse<>(true, "Success", data);
+    public static <T> ResponseEntity<BaseResponse<T>> success(T data) {
+        return ResponseEntity.ok(new BaseResponse<>(true, "Success", data));
     }
 
     public static <T> BaseResponse<T> error(String message) {
