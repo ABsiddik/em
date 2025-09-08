@@ -5,7 +5,7 @@ import itkhamar.com.enums.EmployeeType;
 
 import java.time.LocalDate;
 
-public record Employee(
+public record EmployeeResponse(
         String name,
         String phone,
         String department,
