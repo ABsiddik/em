@@ -1,2 +1,6 @@
-# em
-Employee Management Portal, Develop with Spring boot, Webflux reactive, MongoDB
+# EM
+Employee Management Portal, Developed with - 
+- Spring boot,
+- Webflux reactive,
+- JWT
+- MongoDB,
