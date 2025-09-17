@@ -20,4 +20,8 @@ public class BaseResponse<T> {
     public static <T> BaseResponse<T> error(String message) {
         return new BaseResponse<>(false, message, null);
     }
+
+    public static <T> BaseResponse<T> error(String message, T data) {
+        return new BaseResponse<>(false, message, data);
+    }
 }
