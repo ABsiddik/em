@@ -23,6 +23,11 @@ public class EmployeeController {
         return employeeService.findAllEmployee();
     }
 
+    @PostMapping("/hr/employees")
+    public Mono<ResponseEntity<?>> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest) {
+        return employeeService.createEmployee(employeeRequest, false);
+    }
+
     @PostMapping("/admin/employees/hr")
     public Mono<ResponseEntity<?>> createHR(@Valid @RequestBody EmployeeRequest employeeRequest) {
         return employeeService.createEmployee(employeeRequest, true);
