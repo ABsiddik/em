@@ -1,4 +1,4 @@
-#version: '3.8'
+version: '3.8'
 
 services:
   mongo:
@@ -11,8 +11,23 @@ services:
       MONGO_INITDB_DATABASE: em_portal
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+    networks:
+      - em_network
     volumes:
       - mongo_data:/data/db
 
+  em_portal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - em_network
+
 volumes:
   mongo_data:
+
+networks:
+  em_network:
+    driver: bridge
