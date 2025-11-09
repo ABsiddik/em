@@ -26,6 +26,6 @@ public record EmployeeRequest(
 
         @NotNull(message = "Joining date is required")
         @PastOrPresent(message = "Joining date cannot be in the future")
-        @JsonFormat(pattern = "dd-MM-yyyy")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate joiningDate
 ) { }
